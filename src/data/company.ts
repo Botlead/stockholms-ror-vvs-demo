@@ -5,6 +5,8 @@ export const COMPANY = {
   phoneHref: 'tel:08360535',
   emergencyPhone: '076-054 01 61',
   emergencyPhoneHref: 'tel:0760540161',
+  phoneDisplay: '08 36 05 35',
+  emergencyPhoneDisplay: '076 054 01 61',
   email: 'info@stockholms-rorvvs.se',
   emailHref: 'mailto:info@stockholms-rorvvs.se',
   address: 'Södra Kungsvägen 68',

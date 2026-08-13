@@ -297,7 +297,7 @@ export default function HeatPumpPage() {
             </div>
             <div>
               <span className="block text-xs text-ink-300 font-medium">Telefon</span>
-              <span className="block font-display font-bold text-navy-800 text-sm">{COMPANY.phone}</span>
+              <span className="block font-display font-bold text-navy-800 text-sm tabular-nums tracking-tight">{COMPANY.phoneDisplay}</span>
             </div>
           </a>
           <a href={COMPANY.emergencyPhoneHref} className="group flex items-center gap-3 rounded-xl bg-white border border-canvas-200 px-4 py-4 transition-all hover:shadow-soft-h hover:-translate-y-0.5">
@@ -306,7 +306,7 @@ export default function HeatPumpPage() {
             </div>
             <div>
               <span className="block text-xs text-emergency-400 font-medium">Akutjour</span>
-              <span className="block font-display font-bold text-navy-800 text-sm">{COMPANY.emergencyPhone}</span>
+              <span className="block font-display font-bold text-navy-800 text-sm tabular-nums tracking-tight">{COMPANY.emergencyPhoneDisplay}</span>
             </div>
           </a>
           <a href={COMPANY.emailHref} className="group flex items-center gap-3 rounded-xl bg-white border border-canvas-200 px-4 py-4 transition-all hover:shadow-soft-h hover:-translate-y-0.5">

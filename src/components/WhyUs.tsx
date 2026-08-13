@@ -1,11 +1,6 @@
 import { useReveal } from '@/hooks/useReveal';
 import { WHY_US } from '@/data/company';
 
-const ICONS: Record<string, React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
-  Award: () => null, BadgeCheck: () => null, Sparkles: () => null,
-  Zap: () => null, Siren: () => null, Layers: () => null,
-};
-
 export default function WhyUs() {
   const { ref, visible } = useReveal();
 
@@ -25,16 +20,12 @@ export default function WhyUs() {
           </h2>
         </div>
 
-        {/* Horizontal numbered layout */}
+        {/* Horizontal numbered layout — premium editorial */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-canvas-200 rounded-2xl overflow-hidden border border-canvas-200">
           {WHY_US.slice(0, 4).map((item, i) => (
             <div key={item.title}
               className={`reveal ${visible ? 'is-visible' : ''} group relative bg-white p-8 lg:p-10 transition-all duration-500 hover:bg-canvas-50/50`}
               style={{ transitionDelay: `${i * 100}ms` }}>
-              {/* Number */}
-              <span className="font-display font-extrabold text-4xl text-accent-100 transition-colors duration-500 group-hover:text-accent-300 block mb-4">
-                0{i + 1}
-              </span>
               {/* Title */}
               <h3 className="font-display font-bold text-navy-800 text-lg mb-2 leading-tight">{item.title}</h3>
               {/* Description */}

@@ -6,9 +6,9 @@ type Message = { role: 'bot' | 'user'; text: string };
 
 const QUICK_OPTIONS = [
   { label: 'Akut hjälp', icon: Siren, response: 'Vid akuta VVS-problem, ring oss direkt på 076-054 01 61 – vi finns tillgängliga dygnet runt och är på plats inom en timme.' },
-  { label: 'Få offert', icon: FileText, response: `Fyll i kontaktformuläret på sidan så återkommer vi med en kostnadsfri offert. Du kan också ringa ${COMPANY.phone} eller maila ${COMPANY.email}.` },
+  { label: 'Få offert', icon: FileText, response: `Gå till offertförfrågan så återkommer vi med en kostnadsfri offert. Du kan också ringa ${COMPANY.phoneDisplay} eller maila ${COMPANY.email}.` },
   { label: 'Våra tjänster', icon: Wrench, response: 'Vi erbjuder VVS-installationer, rördragning, stambyten, kök, badrumsrenovering, värmesystem, värmepumpar, service, reparationer, akut VVS och stopp i avlopp.' },
-  { label: 'Kontakta oss', icon: HelpCircle, response: `Ring ${COMPANY.phone}, akutjour ${COMPANY.emergencyPhone} eller maila ${COMPANY.email}. Fyll gärna i formuläret på sidan.` },
+  { label: 'Kontakta oss', icon: HelpCircle, response: `Ring ${COMPANY.phoneDisplay}, akutjour ${COMPANY.emergencyPhoneDisplay} eller maila ${COMPANY.email}.` },
 ];
 
 export default function Chatbot() {
@@ -36,7 +36,7 @@ export default function Chatbot() {
     setTimeout(() => {
       setMessages((prev) => [...prev, {
         role: 'bot',
-        text: `Tack! För bästa hjälp, ring ${COMPANY.phone} eller fyll i formuläret på sidan. Vid akuta ärenden, ring ${COMPANY.emergencyPhone}.`,
+        text: `Tack! För bästa hjälp, ring ${COMPANY.phoneDisplay} eller gå till offertförfrågan. Vid akuta ärenden, ring ${COMPANY.emergencyPhoneDisplay}.`,
       }]);
     }, 700);
   };
@@ -67,7 +67,7 @@ export default function Chatbot() {
 
       {/* Chat button */}
       <button onClick={() => { setOpen(!open); setShowNotification(false); }}
-        className="fixed bottom-20 lg:bottom-6 right-4 lg:right-6 z-40 flex h-13 w-13 items-center justify-center rounded-full bg-accent-600 text-white shadow-accent transition-all hover:scale-110"
+        className="fixed bottom-20 lg:bottom-6 right-4 lg:right-6 z-40 flex items-center justify-center rounded-full bg-accent-600 text-white shadow-accent transition-all duration-300 hover:scale-110"
         style={{ height: '3.25rem', width: '3.25rem' }}
         aria-label="Öppna chat">
         {open ? <X className="h-5 w-5" /> : <MessageCircle className="h-5 w-5" />}
@@ -82,10 +82,10 @@ export default function Chatbot() {
       {/* Chat window */}
       <div className={`fixed bottom-36 lg:bottom-24 right-4 lg:right-6 z-40 w-[calc(100vw-2rem)] max-w-sm origin-bottom-right transition-all duration-300 ${open ? 'scale-100 opacity-100 visible' : 'scale-95 opacity-0 invisible'}`}>
         <div className="rounded-2xl bg-white shadow-soft-h border border-canvas-200 overflow-hidden flex flex-col max-h-[480px]">
-          {/* Header — minimal */}
-          <div className="flex items-center gap-3 px-4 py-3.5 border-b border-canvas-200">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-50">
-              <MessageCircle className="h-4.5 w-4.5 text-accent-600" />
+          {/* Header — integrated with site design */}
+          <div className="flex items-center gap-3 px-4 py-3.5 border-b border-canvas-200 bg-canvas-50">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-600">
+              <MessageCircle className="h-4.5 w-4.5 text-white" />
             </div>
             <div className="flex-1">
               <h4 className="font-display font-bold text-navy-800 text-sm">Stockholms Rör & VVS</h4>
@@ -98,7 +98,7 @@ export default function Chatbot() {
               </div>
             </div>
             <button onClick={() => setOpen(false)}
-              className="flex h-7 w-7 items-center justify-center rounded-lg text-ink-300 hover:bg-canvas-50" aria-label="Stäng">
+              className="flex h-7 w-7 items-center justify-center rounded-lg text-ink-300 hover:bg-canvas-100" aria-label="Stäng">
               <X className="h-4 w-4" />
             </button>
           </div>
@@ -110,7 +110,7 @@ export default function Chatbot() {
                 <div className={`max-w-[80%] rounded-2xl px-3.5 py-2.5 text-sm ${
                   msg.role === 'user'
                     ? 'bg-accent-600 text-white rounded-br-md'
-                    : 'bg-white border border-canvas-200 text-navy-800 rounded-bl-md'
+                    : 'bg-white border border-canvas-200 text-navy-800 rounded-bl-md shadow-soft'
                 }`}>{msg.text}</div>
               </div>
             ))}
@@ -119,7 +119,7 @@ export default function Chatbot() {
 
           {/* Quick options */}
           {messages.length <= 1 && (
-            <div className="px-4 pb-3 space-y-2">
+            <div className="px-4 pb-3 space-y-2 bg-white">
               <div className="grid grid-cols-2 gap-2">
                 {QUICK_OPTIONS.map((option) => (
                   <button key={option.label} onClick={() => handleQuickOption(option)}
@@ -133,7 +133,7 @@ export default function Chatbot() {
           )}
 
           {/* Input */}
-          <form onSubmit={handleSend} className="flex items-center gap-2 border-t border-canvas-200 p-3">
+          <form onSubmit={handleSend} className="flex items-center gap-2 border-t border-canvas-200 p-3 bg-white">
             <input type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Skriv ett meddelande..."
               className="flex-1 rounded-xl border border-canvas-200 bg-canvas-50 px-3.5 py-2.5 text-sm text-navy-800 placeholder-ink-300 focus:border-accent-400 focus:bg-white focus:ring-2 focus:ring-accent-100 transition-all outline-none" />
             <button type="submit"
@@ -146,7 +146,7 @@ export default function Chatbot() {
           <a href={COMPANY.emergencyPhoneHref}
             className="group flex items-center justify-center gap-2 bg-emergency-50 border-t border-emergency-100 px-4 py-2.5 text-xs font-semibold text-emergency-600 hover:bg-emergency-100 transition-colors">
             <Phone className="h-3.5 w-3.5 transition-transform group-hover:rotate-12" />
-            Akut? Ring jour – {COMPANY.emergencyPhone}
+            Akut? Ring jour – <span className="tabular-nums tracking-tight">{COMPANY.emergencyPhoneDisplay}</span>
           </a>
         </div>
       </div>

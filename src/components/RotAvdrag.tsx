@@ -34,7 +34,7 @@ export default function RotAvdrag() {
               ))}
             </div>
 
-            <a href="#kontakt"
+            <a href="#offertforfragan"
               className="shimmer mt-8 inline-flex items-center gap-2 rounded-xl bg-accent-600 px-6 py-3.5 text-sm font-semibold text-white shadow-accent transition-all hover:bg-accent-700 hover:-translate-y-0.5">
               Få offert med ROT-avdrag
               <ArrowRight className="h-4 w-4" />

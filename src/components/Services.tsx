@@ -25,96 +25,77 @@ export default function Services() {
             Tjänster
           </span>
           <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-navy-800 text-balance leading-tight">
-            Allt inom VVS.
+            Vad behöver du hjälp med?
           </h2>
           <p className="mt-5 text-lg text-ink-500 leading-relaxed text-pretty">
             Från installationer och stambyten till akut hjälp och värmepumpar – vi tar oss an alla typer av VVS-projekt.
           </p>
         </div>
 
-        {/* Services grid — image cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* Services — editorial list layout */}
+        <div className="border-t border-canvas-200">
           {SERVICES.map((service, i) => {
             const Icon = ICONS[service.icon] ?? Wrench;
             const isEmergency = service.icon === 'Siren';
             const isHeatPump = service.title === 'Värmepumpar';
 
-            const card = (
-              <>
-                {/* Image with overlaid content — merged */}
-                <div className="relative h-60 overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  {/* Gradient overlay extending into text area */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-900/95 via-navy-900/45 to-navy-900/20" />
-                  {/* Icon badge */}
-                  <div className={`absolute top-4 left-4 flex h-10 w-10 items-center justify-center rounded-xl shadow-soft transition-all duration-500 ${
-                    isEmergency
-                      ? 'bg-emergency-500 text-white'
-                      : 'bg-white/90 text-accent-600 group-hover:bg-accent-600 group-hover:text-white'
-                  }`}>
-                    <Icon className="h-5 w-5" strokeWidth={2} />
-                  </div>
-                  {/* Title + description overlaid on image */}
-                  <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <h3 className="font-display font-bold text-white text-lg leading-tight mb-1.5 drop-shadow-lg">
-                      {service.title}
-                    </h3>
-                    <p className="text-sm text-white/80 leading-relaxed line-clamp-2 drop-shadow">
-                      {service.description}
-                    </p>
-                    <div className={`mt-3 inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${
-                      isEmergency ? 'text-emergency-300' : 'text-accent-300'
-                    }`}>
-                      {isHeatPump ? 'Läs mer' : isEmergency ? 'Ring akutjour' : 'Få offert'}
-                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                    </div>
-                  </div>
-                </div>
-              </>
-            );
+            const href = isHeatPump
+              ? '#varmepumpar'
+              : isEmergency
+                ? COMPANY.emergencyPhoneHref
+                : `#offertforfragan?service=${encodeURIComponent(service.title)}`;
 
-            const wrapperClass = `reveal ${visible ? 'is-visible' : ''} group relative flex flex-col overflow-hidden rounded-2xl border border-canvas-200 shadow-soft transition-all duration-500 hover:shadow-soft-h hover:-translate-y-1`;
-
-            if (isHeatPump) {
-              return (
-                <a key={service.title} href="#varmepumpar" className={wrapperClass} style={{ transitionDelay: `${i * 50}ms` }}>
-                  {card}
-                </a>
-              );
-            }
-
-            if (isEmergency) {
-              return (
-                <a key={service.title} href={COMPANY.emergencyPhoneHref} className={wrapperClass} style={{ transitionDelay: `${i * 50}ms` }}>
-                  {card}
-                </a>
-              );
-            }
+            const ctaText = isHeatPump ? 'Läs mer' : isEmergency ? 'Ring akutjour' : 'Få offert';
 
             return (
-              <a key={service.title} href={`#offertforfragan?service=${encodeURIComponent(service.title)}`} className={wrapperClass} style={{ transitionDelay: `${i * 50}ms` }}>
-                {card}
+              <a key={service.title} href={href}
+                className={`reveal ${visible ? 'is-visible' : ''} group relative flex items-center gap-5 border-b border-canvas-200 py-6 lg:py-7 px-2 transition-all duration-500 hover:bg-blue-tint/50`}
+                style={{ transitionDelay: `${i * 40}ms` }}>
+                {/* Icon */}
+                <div className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl transition-all duration-500 ${
+                  isEmergency
+                    ? 'bg-emergency-50 text-emergency-600 group-hover:bg-emergency-500 group-hover:text-white'
+                    : 'bg-accent-50 text-accent-600 group-hover:bg-accent-600 group-hover:text-white'
+                }`}>
+                  <Icon className="h-5 w-5 transition-transform duration-500 group-hover:scale-110" strokeWidth={2} />
+                </div>
+
+                {/* Title + description */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-display font-bold text-navy-800 text-base lg:text-lg leading-tight mb-0.5 transition-colors duration-300 group-hover:text-accent-700">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm text-ink-500 leading-relaxed line-clamp-1 lg:line-clamp-none">{service.description}</p>
+                </div>
+
+                {/* Arrow CTA */}
+                <div className={`flex items-center gap-1.5 text-sm font-semibold flex-shrink-0 transition-all duration-300 ${
+                  isEmergency ? 'text-emergency-600' : 'text-accent-600'
+                }`}>
+                  <span className="hidden sm:inline">{ctaText}</span>
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+                </div>
+
+                {/* Bottom accent line — animates on hover */}
+                <div className={`absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-500 group-hover:w-full ${
+                  isEmergency ? 'bg-emergency-500' : 'bg-accent-600'
+                }`} />
               </a>
             );
           })}
         </div>
 
         {/* Minimal CTA */}
-        <div className="mt-12 flex items-center gap-4">
+        <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <a href="#offertforfragan"
-            className="shimmer flex items-center gap-2 rounded-xl bg-accent-600 px-6 py-3 text-sm font-semibold text-white shadow-accent transition-all hover:bg-accent-700 hover:-translate-y-0.5">
-            Få offert
+            className="shimmer flex items-center gap-2 rounded-xl bg-accent-600 px-6 py-3.5 text-sm font-semibold text-white shadow-accent transition-all hover:bg-accent-700 hover:-translate-y-0.5">
+            Få kostnadsfri offert
             <ArrowRight className="h-4 w-4" />
           </a>
           <a href={COMPANY.phoneHref}
             className="flex items-center gap-2 text-sm font-semibold text-navy-800 hover:text-accent-600 transition-colors">
             <Phone className="h-4 w-4 text-accent-600" />
-            {COMPANY.phone}
+            <span className="tabular-nums tracking-tight">{COMPANY.phoneDisplay}</span>
           </a>
         </div>
       </div>

@@ -108,6 +108,24 @@
 
   /* Scroll indicator bounce */
   .scroll-bounce { animation: scrollBounce 2s ease-in-out infinite; }
+
+  /* Light gradient text — for hero on dark bg */
+  .gradient-text-light {
+    background: linear-gradient(135deg, #4DA3FF 0%, #147DFF 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Step transition for multi-step form */
+  .animate-step-in {
+    animation: stepIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Particle drift — very subtle AI-inspired */
+  .animate-particle-drift {
+    animation: particleDrift 20s ease-in-out infinite;
+  }
 }
 
 @keyframes enterUp { to { opacity: 1; transform: translateY(0); } }
@@ -118,10 +136,30 @@
   50% { transform: translateY(6px); opacity: 1; }
 }
 
+@keyframes stepIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes particleDrift {
+  0%, 100% { transform: translate(0, 0); opacity: 0.4; }
+  25% { transform: translate(30px, -20px); opacity: 0.6; }
+  50% { transform: translate(-20px, 15px); opacity: 0.3; }
+  75% { transform: translate(15px, -10px); opacity: 0.5; }
+}
+
 @keyframes pulseDot {
   0% { transform: scale(0.8); opacity: 0.6; }
   100% { transform: scale(2); opacity: 0; }
 }
+
+@keyframes ctaFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.cta-float { animation: ctaFloat 3.5s ease-in-out infinite; }
+.cta-float-delay-1 { animation: ctaFloat 3.5s ease-in-out infinite; animation-delay: 0.4s; }
+.cta-float-delay-2 { animation: ctaFloat 3.5s ease-in-out infinite; animation-delay: 0.8s; }
 
 /* Preloader */
 .preloader {

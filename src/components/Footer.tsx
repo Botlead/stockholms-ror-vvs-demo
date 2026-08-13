@@ -4,7 +4,7 @@ import { COMPANY, NAV_LINKS, PARTNERS } from '@/data/company';
 export default function Footer() {
   return (
     <footer className="bg-navy-800 text-navy-100 pt-16 pb-24 lg:pb-12 relative overflow-hidden">
-      <div className="absolute inset-0 grid-pd opacity-20" />
+      <div className="absolute inset-0 grid-pd opacity-15" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/20 to-transparent" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -21,7 +21,7 @@ export default function Footer() {
               Din VVS-auktoriserade rörmokare i Stockholm och på Lidingö. Professionella VVS-tjänster, installationer och akut hjälp dygnet runt.
             </p>
             <a href={COMPANY.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram"
-              className="group mt-5 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 border border-white/10 text-navy-200 hover:bg-accent-600 hover:text-white hover:border-transparent transition-all">
+              className="group mt-5 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 border border-white/10 text-navy-200 hover:bg-accent-600 hover:text-white hover:border-transparent transition-all duration-300">
               <Instagram className="h-4.5 w-4.5 transition-transform group-hover:scale-110" />
             </a>
           </div>
@@ -46,15 +46,15 @@ export default function Footer() {
             <h4 className="font-display font-bold text-white text-sm mb-4">Kontakt</h4>
             <ul className="space-y-3">
               <li>
-                <a href={COMPANY.phoneHref} className="flex items-center gap-2.5 text-sm text-navy-200 hover:text-accent-400 transition-colors">
+                <a href={COMPANY.phoneHref} className="flex items-center gap-2.5 text-sm text-navy-200 hover:text-accent-400 transition-colors tabular-nums tracking-tight">
                   <Phone className="h-4 w-4 text-accent-400" />
-                  {COMPANY.phone}
+                  {COMPANY.phoneDisplay}
                 </a>
               </li>
               <li>
-                <a href={COMPANY.emergencyPhoneHref} className="flex items-center gap-2.5 text-sm text-navy-200 hover:text-emergency-400 transition-colors">
+                <a href={COMPANY.emergencyPhoneHref} className="flex items-center gap-2.5 text-sm text-navy-200 hover:text-emergency-400 transition-colors tabular-nums tracking-tight">
                   <Siren className="h-4 w-4 text-emergency-400" />
-                  {COMPANY.emergencyPhone}
+                  {COMPANY.emergencyPhoneDisplay}
                 </a>
               </li>
               <li>
@@ -72,17 +72,17 @@ export default function Footer() {
 
           {/* Emergency + Partners */}
           <div className="lg:col-span-2">
-            <div className="rounded-xl bg-emergency-500/10 border border-emergency-400/20 p-4 mb-5">
+            <div className="rounded-xl bg-accent-500/10 border border-accent-400/20 p-4 mb-5">
               <div className="flex items-center gap-2 mb-2">
-                <Siren className="h-4 w-4 text-emergency-400" />
-                <span className="text-sm font-semibold text-emergency-300">Akut VVS-jour</span>
+                <Siren className="h-4 w-4 text-accent-400" />
+                <span className="text-sm font-semibold text-accent-300">Akut VVS-jour</span>
               </div>
               <p className="text-xs text-navy-200 mb-2 flex items-center gap-1.5">
                 <Clock className="h-3 w-3" />
                 Dygnet runt – inom en timme
               </p>
-              <a href={COMPANY.emergencyPhoneHref} className="block font-display font-bold text-white hover:text-emergency-300 transition-colors">
-                {COMPANY.emergencyPhone}
+              <a href={COMPANY.emergencyPhoneHref} className="block font-display font-bold text-white hover:text-accent-300 transition-colors tabular-nums tracking-tight">
+                {COMPANY.emergencyPhoneDisplay}
               </a>
             </div>
             <div className="flex flex-wrap gap-1.5">

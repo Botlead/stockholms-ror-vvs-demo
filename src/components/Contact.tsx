@@ -54,7 +54,7 @@ export default function Contact() {
               </div>
               <div>
                 <span className="block text-xs text-ink-300 font-medium">Telefon</span>
-                <span className="block font-display font-bold text-navy-800">{COMPANY.phone}</span>
+                <span className="block font-display font-bold text-navy-800 tabular-nums tracking-tight">{COMPANY.phoneDisplay}</span>
               </div>
             </a>
 
@@ -65,7 +65,7 @@ export default function Contact() {
               </div>
               <div>
                 <span className="block text-xs text-emergency-400 font-medium">Akutjour</span>
-                <span className="block font-display font-bold text-navy-800">{COMPANY.emergencyPhone}</span>
+                <span className="block font-display font-bold text-navy-800 tabular-nums tracking-tight">{COMPANY.emergencyPhoneDisplay}</span>
                 <span className="block text-xs text-ink-300">Dygnet runt</span>
               </div>
             </a>
