@@ -1,16 +1,11 @@
 import { useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
 import {
   ArrowLeft, ArrowRight, Send, CheckCircle2, Phone, Siren, Mail, MapPin,
   Clock, Award, ShieldCheck, User, Mail as MailIcon, Phone as PhoneIcon, Home, MessageSquare,
   ThermometerSun, Snowflake, Flame, Wrench, Leaf, Zap, ArrowDown, Home as HomeIcon, Droplets,
 } from 'lucide-react';
 import { COMPANY } from '@/data/company';
-
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY,
-);
+import { safeInsert } from '@/lib/supabase';
 
 const HEAT_PUMP_TYPES = [
   { value: 'Bergvärme', label: 'Bergvärme', icon: Flame },
@@ -42,7 +37,7 @@ export default function HeatPumpPage() {
       return;
     }
     setStatus('submitting');
-    const { error } = await supabase.from('quote_requests').insert({
+    const { error } = await safeInsert('quote_requests', {
       name: form.name,
       phone: form.phone,
       email: form.email,

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
 import {
   ArrowLeft, ArrowRight, Send, CheckCircle2, Phone, Siren, Mail, MapPin,
   Clock, Award, Wrench, Bath, Flame, Droplets, Layers, Siren as SirenIcon,
@@ -7,11 +6,7 @@ import {
   ThermometerSun, Home as HomeIcon,
 } from 'lucide-react';
 import { COMPANY, SERVICES } from '@/data/company';
-
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY,
-);
+import { safeInsert } from '@/lib/supabase';
 
 const SERVICE_OPTIONS = [
   { value: 'Akut VVS', label: 'Akut VVS', icon: SirenIcon },
@@ -43,7 +38,7 @@ export default function QuoteRequestPage() {
       return;
     }
     setStatus('submitting');
-    const { error } = await supabase.from('quote_requests').insert({
+    const { error } = await safeInsert('quote_requests', {
       name: form.name,
       phone: form.phone,
       email: form.email,
